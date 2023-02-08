@@ -1,0 +1,22 @@
+.CanteenListLoaderMain img{
+  padding-left: 45%;
+  padding-top: 200px;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+@media screen and (max-width: 450px){
+  .CanteenListLoaderMain img{
+    padding-left: 15vh;
+    padding-top:30vh;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}

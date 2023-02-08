@@ -1,0 +1,14 @@
+.arrowback-icon-maincanteen{
+    font-size: 33px;
+    margin-top: 13px;
+}
+.title-maincateen{
+    margin-top: 5px;
+    color: black;
+}
+
+@media(max-width: 430px){
+    .main-can-title{
+        font-size: 1.8rem;
+    }
+}

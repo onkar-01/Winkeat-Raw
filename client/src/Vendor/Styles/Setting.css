@@ -1,0 +1,56 @@
+.setting-view {
+  width: 100%;
+}
+.container-1 {
+  width: 100%;
+  margin-top: 100px;
+}
+.setting-view .setting-container {
+  width: 80%;
+  height: 100px;
+  margin-top: 15px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-top: 1px;
+  background: #f9f9f9;
+  border-bottom: 2px solid #ffcf52;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.setting-view .setting-container .setting {
+  margin-top: 20px;
+}
+.setting-view .setting-container .profile {
+  margin-left: 50px !important;
+  padding-top: 20px;
+
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 43px;
+  line-height: 64px;
+  color: #000000;
+}
+@media screen and (max-width: 800px) {
+  .container-1 {
+    width: 100%;
+    margin-top: 100px;
+  }
+  .setting-view .setting-container {
+    height: 80px;
+  }
+  .setting-view .setting-container .setting {
+    margin-top: 8px;
+  }
+  .setting-view .setting-container .profile {
+    margin-left: 0px !important;
+    padding-top: 20px;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 23px;
+    line-height: 64px;
+    color: #000000;
+    margin-left: 50px !important;
+  }
+}

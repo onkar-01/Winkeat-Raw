@@ -1,0 +1,35 @@
+.inventory {
+  margin-top: 100px !important;
+  margin-left: 3% !important;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+.all-inventory {
+  width: 90%;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 50px;
+  display: flex;
+}
+.inventory-list {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (max-width: 800px) {
+  .inventory {
+    width: 100%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .inventory-card {
+    margin-left: -7px !important;
+  }
+  .all-inventory {
+    padding-left: 0px;
+  }
+}

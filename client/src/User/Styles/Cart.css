@@ -1,0 +1,267 @@
+.cartcontainer{
+    display: flex;
+    flex-wrap:nowrap;
+    
+}
+.cartcontainer .leftcontainer{
+    flex: 70%;
+    height: 100vh;
+    background-color: #ffffff;
+    padding-left: 6%;
+}
+.cartcontainer .rightcontainer{
+    flex: 30%;
+    display:flex;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    height: 100vh;
+    background-color: #FFCF52;
+    flex-direction: column;
+    position: fixed;
+    right: 0;
+}
+.cartcontainer .rightcontainer .textArea{
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+    padding: 20px;
+    /* border-bottom: 1px solid #000000; */
+}
+.fortharea{
+    margin-left: 50px;
+}
+.cartcontainer .rightcontainer .textArea .firstarea{
+    font-size:40px;
+    font-weight: 500;
+    /* border-bottom: 1px solid black; */
+}
+.cartcontainer .rightcontainer .textArea .secondarea{
+    padding-top: 30px;
+    align-items: center;
+    font-weight: 500;
+    margin: 100px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.cartcontainer .rightcontainer .textArea .secondarea span{
+    margin-left: 20px;
+    font-weight: 400;
+    
+}
+.cartcontainer  .rightcontainer .textArea .lastArea{
+    position: absolute;
+    bottom: 0;
+    justify-content: center;
+    margin:50px;
+}
+.cartcontainer .rightcontainer .textArea .thirdarea .FormControl1{
+    min-width: 200px;
+    margin: 90px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    background-color: #ffd56a;
+    color: black;
+    box-shadow: inset 0px 4px 4px rgba(0, 0.15, 0, 0.15);
+border: none;
+
+
+}
+.cartcontainer .rightcontainer .textArea .thirdarea .FormControl1:focus{
+    outline: none;
+}
+.cartcontainer .rightcontainer hr{
+    color: black;
+    border: 0.5px solid black;
+    margin: 60px;
+    margin-bottom: 20px;
+}
+.cartcontainer .rightcontainer .fiftharea{
+    padding-top: 0px;
+    align-items: center;
+    font-weight: 500;
+    margin-left: 110px;
+
+}
+.cartcontainer .rightcontainer .fiftharea span{
+    font-weight: 400;
+    margin-left: 10px;
+    color: #424242;
+    
+}
+
+.cartcontainer .rightcontainer .textArea .lastArea .proceed-to-payment-btn{
+    
+    width: 300px;
+    height: 70px;
+    background-color: #FFB904;
+    font-size: 22px;
+    font-weight: 700;
+    border:none;
+    border-radius: 10px;
+    cursor: pointer;
+    
+}
+
+.cart-navbar{
+    display: flex;
+    text-align: center;
+    /* padding-left: 200px; */
+    padding-top: 20px;
+    position: fixed;
+    top: 0;
+    width: 100vh;
+    background: white;
+    z-index: 100;
+    height: 95px;
+}
+.cart-navbar-arrowicon{
+    padding-top: 10px;
+}
+.cart-title{
+    padding-left: 80px;
+    color: #535353;
+}
+.cart-title h1{
+    font-weight: 600;
+}
+.leftcontainer .lables .lableBar{
+    display: flex;
+    padding: 20px;
+    justify-content:flex-start;
+    padding-left: 0px;
+    margin-left :30px;
+    padding-right: 0px;
+    border-bottom: 1px solid #000000;
+    width: 800px;
+
+}
+.leftcontainer .lables .lableBar #lable1{
+    flex: 25%;
+    
+    font-size: 20px;
+    font-weight: 500;
+    margin-left: 30px;
+}
+.leftcontainer .lables .lableBar #lable2{
+    flex: 25%;
+    font-size: 20px;
+    font-weight: 500;
+}
+.leftcontainer .lables .lableBar #lable3{
+    flex: 25%;
+    font-size: 20px;
+    font-weight: 500;
+}
+.leftcontainer .lables .lableBar #lable4{
+    flex: 25%;
+    font-size: 20px;
+    font-weight: 500;
+}
+/* Mobile view */
+.topContainer{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    padding-left: 0px;
+
+    height: 80vh;
+    padding-right: 0px;
+    width: 90vh;
+}
+.topContainer .cart-navbar-arrowicon{
+    padding-top: 10px;
+}
+.topContainer .cart-navbar{
+    flex: 20%;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+.cartcontainer .MuiSvgIcon-root{
+    font-size: 2.5rem !important;
+}
+
+.topContainer .cart-body-Mobile{
+    width: 90%;
+    overflow-x: scroll;
+}
+.BottomArea{
+    bottom: 0;
+    padding: 20px;
+    border-top: 0.2px solid black;
+    border-bottom: 0.2px solid black;
+    background-color: #FFCF52;
+    width: 90vh;
+    height: 90px;
+    position: fixed;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+@media screen and (max-width: 1224px) {
+.cartcontainer{
+
+    display: flex;
+    flex-wrap:nowrap;
+    flex-direction: column;
+
+}}
+
+.firstAreaMobile .FormControl1Mobile{
+    min-width: 70vh;
+    margin: 90px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    background-color: #ffd56a;
+    color: black;
+    box-shadow: inset 0px 4px 4px rgba(0, 0.15, 0, 0.15);
+    border: none;
+    border-radius: 40px;
+}
+.firstAreaMobile .MuiInputBase-root{
+    font-size: 20px;
+    font-weight: 500;
+    height: 10vh;
+    border-radius: 40px;
+}
+.firstAreaMobile #demo-simple-select-label{
+    margin-top: -6px;
+    margin-left: 11px;
+    font-size: 30px;
+}
+
+.firstAreaMobile .Mui-focused{
+    font-size: 20px !important;
+}
+.fourthareaMobile #hrTag{
+    margin-bottom: 30px;
+    /* font-size: 30px; */
+    border: 1px solid black;
+    margin-left: 21vh;
+    width: 45vh;
+}
+.secondAreaMobile .FormControl2Mobile{
+    min-width: 70vh;
+    margin: 90px;
+    margin-top:0px;
+    color: black;
+    border: none;
+    border-radius: 40px;
+}
+.secondAreaMobile .MuiInputBase-input{
+    font-size: 30px;
+    font-weight: 500;
+    border: none !important;
+    border-radius: 40px !important;
+    height: 5vh;
+}
+.secondAreaMobile .MuiInputBase-input::placeholder{
+    font-size: 25px;
+    margin-left: 30px !important;
+}
+.secondAreaMobile .css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root{
+    left: 30px!important;
+    font-size: 30px!important;
+}
