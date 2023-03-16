@@ -14,12 +14,16 @@ const customerOrderSchema = new mongoose.Schema(
     },
     items: [
       {
-        product: {
+        itemId: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "Product",
+          ref: "Item",
           required: true,
         },
         quantity: {
+          type: Number,
+          required: true,
+        },
+        price: {
           type: Number,
           required: true,
         },
@@ -31,7 +35,7 @@ const customerOrderSchema = new mongoose.Schema(
     },
     paymentStatus: {
       type: String,
-      enum: ["pending", "completed","failed"],
+      enum: ["pending", "paid", "failed"],
     },
     status: {
       type: String,
@@ -44,6 +48,6 @@ const customerOrderSchema = new mongoose.Schema(
   }
 );
 
-const CustomerOrder = mongoose.model("CustomerOrder", customerOrderSchema);
+const Order = mongoose.model("Order", customerOrderSchema);
 
-module.exports = CustomerOrder;
+module.exports = Order;

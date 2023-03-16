@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
+import Sidebar from "../Components/Sidebar/Sidebar";
 import "../Styles/Prevorders.css";
-import Sidebar from "../../Common/Components/Sidebar/Sidebar";
-import orderData from "../OrderData";
 import OrderCard from "../Components/Ordercard/OrderCard";
-import Bottombar from "../Components/User-bottomBar/Bottombar";
+import Bottombar from "../Components/Vendor-bottomBar/Bottombar";
 const Prevorders = () => {
   const [orderData, setOrderData] = useState([]);
 
@@ -44,7 +43,7 @@ const Prevorders = () => {
       <div className="order-container">
         <Sidebar />
         <Bottombar />
-        <h1 className="order-page-h1">Previous Orders</h1>
+        <h1 className="vendor-order-page-h1">All Orders</h1>
         {orderData.map(OrderCardInfo)}
       </div>
     </>

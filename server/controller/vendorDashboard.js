@@ -5,6 +5,8 @@ const { Category, upload } = require("../models/Category");
 const { Item } = require("../models/item");
 const { log } = require("console");
 const cloudinary = require("cloudinary").v2;
+const Order = require("../models/Order");
+const User = require("../models/User");
 
 // const addcategory = async (req, res, next) => {
 //   console.log(req.rootVendor._id);
@@ -215,11 +217,26 @@ const deleteitem = async (req, res, next) => {
   }
 };
 
+// const deletecategory = async (req, res, next) => {
+//   try {
+//     const category = await Category.findOneAndDelete({
+//       _id: req.params.id,
+//     }).exec();
+//     res.status(200).json({ message: "Category Deleted Successfully" });
+//   } catch (err) {
+//     return next(err);
+//   }
+// };
 const deletecategory = async (req, res, next) => {
   try {
+    const image = await Category.findOne({
+      _id: req.params.id,
+    }).exec();
+
     const category = await Category.findOneAndDelete({
       _id: req.params.id,
     }).exec();
+    const items = await Item.deleteMany({ category: req.params.id }).exec();
     res.status(200).json({ message: "Category Deleted Successfully" });
   } catch (err) {
     return next(err);
@@ -241,6 +258,19 @@ const addimage = async (req, res, next) => {
   });
 };
 
+const getorders = async (req, res, next) => {
+  try {
+    const orders = await Order.find({ vendor: req.rootVendor._id })
+      .populate("user", "name email")
+      .populate("vendor", "name")
+      .populate("items.item", "name")
+      .exec();
+    res.status(200).json({ orders });
+  } catch (err) {
+    return next(err);
+  }
+};
+
 module.exports = {
   addcategory,
   item,
@@ -249,4 +279,5 @@ module.exports = {
   deleteitem,
   deletecategory,
   addimage,
+  getorders,
 };

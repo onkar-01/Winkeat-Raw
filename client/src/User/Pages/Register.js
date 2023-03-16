@@ -46,7 +46,9 @@ const Register = () => {
       else{
       window.alert("Registration Successful");
       console.log("Registration Successful");
-      navigate('/login');
+      localStorage.setItem("userName",username)
+      localStorage.setItem("mobileNo",mobileNo)
+      navigate('/otppage');
     }
   }
 

@@ -3,16 +3,16 @@ import "../Styles/User.css";
 import Sidebar from "../../Common/Components/Sidebar/Sidebar";
 import { Link, useNavigate } from "react-router-dom";
 import HashLoader from "react-spinners/HashLoader";
+import Bottombar from "../Components/User-bottomBar/Bottombar";
 const User = () => {
   const navigate = useNavigate();
-  const [Loader,setLoader]=useState(false);
+  const [Loader, setLoader] = useState(false);
   const [userData, setUserData] = useState({});
   useEffect(() => {
     const callAboutPage = async () => {
       try {
         setLoader(true);
         const res = await fetch("/api/user/about", {
-
           method: "GET",
           headers: {
             Accept: "application/json",
@@ -31,11 +31,9 @@ const User = () => {
           navigate("/login");
         }
       } catch (error) {
-        
         navigate("/login");
-
-      } 
-    }
+      }
+    };
     callAboutPage();
     document.title = "About";
   }, [navigate]);
@@ -44,6 +42,7 @@ const User = () => {
     <div className="user-container">
       <div className="user-page-body">
         <Sidebar />
+        <Bottombar />
         <div className="user-col">
           <div className="user-upper-part">
             <div className="user-info-grid">
@@ -57,35 +56,32 @@ const User = () => {
                     height="48"
                   />
                 ) : (
-                  <img src="/images/user-img.jpg" alt="not available" />
+                  <img
+                    src="https://res.cloudinary.com/dwceepc2n/image/upload/v1678856972/vendor/User/Sample_User_Icon_ensrhu.png"
+                    alt="not available"
+                  />
                   // <img src={userData.img} alt="user-img" />
                 )}
               </div>
 
               {/* </div> */}
               <div className="user-info">
-              {
-               Loader ?
-               
-               <>
-              <div >
-              <HashLoader
-                color="#FDCF52"
-                size={30}
-              />
-            </div>
-              </>
-              :
-              <>
-                <h2 className="user-name">{userData.name}</h2>
-                <h4 className="user-userid">{userData.username}</h4>
-                <h4 className="user-email">{userData.mobileNo}</h4>
-              </>
-}
+                {Loader ? (
+                  <>
+                    <div>
+                      <HashLoader color="#FDCF52" size={30} />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <h2 className="user-name">{userData.name}</h2>
+                    <h4 className="user-userid">{userData.username}</h4>
+                    <h4 className="user-email">{userData.mobileNo}</h4>
+                  </>
+                )}
               </div>
             </div>
           </div>
-        
 
           <hr />
           <div className="user-menu-list">

@@ -61,10 +61,9 @@ const InventoryList = () => {
               <div className="inventory-list" style={listStyle}>
                 <div className="category-name">
                   <h1
-                  // style={{
-                  //   textAlign: "left !important",
-                  //   positions: "relative",
-                  // }}
+                    style={{
+                      textAlign: "center",
+                    }}
                   >
                     {cat.name}
                   </h1>

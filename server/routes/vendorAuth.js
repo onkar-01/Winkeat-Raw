@@ -5,7 +5,7 @@ const router = express.Router();
 const { Category } = require("../models/Category");
 const { Item } = require("../models/item");
 // const { ContactToVendor } = require("../models/Contact").ContactToVendor;
-const { Vendor, upload } = require("../models/Vendor");
+const { Vendor } = require("../models/Vendor");
 
 const cloudinary = require("cloudinary").v2; // for cloudinary use
 
@@ -20,11 +20,7 @@ const {
   StepContext,
 } = require("twilio/lib/rest/studio/v1/flow/engagement/step");
 
-router.post(
-  "/signup",
-  upload.array("image", 3),
-  require("../controller/vendorAuth").signup
-);
+router.post("/signup", require("../controller/vendorAuth").signup);
 router.post("/signin", require("../controller/vendorAuth").signin);
 router.get(
   "/signout",
@@ -173,6 +169,12 @@ router.post(
   "/addimage",
   vendorAuthenticate,
   require("../controller/vendorDashboard").addimage
+);
+
+router.get(
+  "/getorders",
+  vendorAuthenticate,
+  require("../controller/vendorDashboard").getorders
 );
 
 router.post("/");

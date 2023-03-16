@@ -7,6 +7,10 @@ const { Item } = require("../models/item");
 const { Category } = require("../models/Category");
 const errorResponce = require("../utils/errorResponce");
 const otpRoute = require("./otpRoutes");
+const {
+  checkout,
+  paymentverification,
+} = require("../controller/paymentController");
 
 const app = express();
 const router = express.Router();
@@ -54,6 +58,12 @@ router.get(
   require("../controller/userDashboard").getcart
 );
 
+router.post(
+  "/removefromcart",
+  userAuthenticate,
+  require("../controller/userDashboard").removefromcartOnebyOne
+);
+
 //Test Code
 router.get("/:reqVendorId/items", userAuthenticate, async (req, res, next) => {
   try {
@@ -90,5 +100,20 @@ router.get("/:reqVendorId/items", userAuthenticate, async (req, res, next) => {
     next(err);
   }
 });
+
+router.post("/checkout", userAuthenticate, checkout);
+
+router.post("/paymentverification", userAuthenticate, paymentverification);
+
+router.post(
+  "/placeorder",
+  userAuthenticate,
+  require("../controller/userDashboard").CustomerOrder
+);
+router.get(
+  "/getorders",
+  userAuthenticate,
+  require("../controller/userDashboard").getorders
+);
 
 module.exports = router;

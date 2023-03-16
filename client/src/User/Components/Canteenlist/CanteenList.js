@@ -35,8 +35,8 @@ const CanteenList = () => {
       <Card 
       Canteenname={name}
       vendorId={vendorId}
-      img1={"./uploads/image/Vendor/"+image[0]}
-      imgPhone={"./uploads/image/Vendor/"+image[1]}
+      img1={image[0]}
+      imgPhone={image[0]}
       isLoading={Loader}
     />
     )

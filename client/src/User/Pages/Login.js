@@ -66,7 +66,7 @@ const Login = () => {
     value=e.target.value;
     setUser({...user,[name]:value});
   }
-  const postData=async (e)=>{
+ const postData=async (e)=>{
     setloader(true)
     e.preventDefault();
     const {mobileNo,password}=user;

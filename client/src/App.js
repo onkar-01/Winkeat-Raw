@@ -9,10 +9,13 @@ import VendorList from "./User/Pages/VendorList";
 import Logout from "./User/Pages/Logout";
 import User from "./User/Pages/User";
 import Prevorders from "./User/Pages/Prevorders";
+import Order from "./Vendor/Pages/Prevorders";
 import Payment from "./User/Pages/Payment";
 import CreditCard from "./User/Components/Payment/CreditCard/CreditCard";
 import DebitCard from "./User/Components/Payment/DebitCard/DebitCard";
 import UPI from "./User/Components/Payment/UPI/UPI";
+import OtpPage from "./User/Pages/OtpPage";
+import PaymentSuccess from "./User/Pages/PaymentSuccess";
 //Removed
 // import CanteenPage from './User/Pages/CanteenPage';
 // end Removed
@@ -45,6 +48,7 @@ const App = () => {
             <Route path="/canteenPage" element={<CanteenPageMain />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/OtpPage" element={<OtpPage />} />
 
             <Route path="/prevorders" element={<Prevorders />} />
             <Route path="/payment" element={<Payment />} />
@@ -52,17 +56,19 @@ const App = () => {
             <Route path="/payment/debit-card" element={<DebitCard />} />
             <Route path="/payment/upi" element={<UPI />} />
             <Route path="/canteenListLoader" element={<CanteenListLoader />} />
+            <Route path="/success" element={<PaymentSuccess />} />
 
             <Route path="*" element={<h1>404 Not Found</h1>} />
             <Route path="vendor">
               <Route path="login" element={<VendorLogin />} />
-              <Route path="home" element={<VendorDashboard />} />
+              {/* <Route path="home" element={<VendorDashboard />} /> */}
               <Route path="inventory" element={<Inventory />} />
               <Route path="additem" element={<AddItem />} />
               <Route path="logout" element={<LogoutVendor />} />
               <Route path="category" element={<Category />} />
               <Route path="inventory/update" element={<UpdateItem />} />
               <Route path="setting" element={<Setting />} />
+              <Route path="home" element={<Order />} />
             </Route>
             {/* <Route path="/contact" element={<Contact />} /> */}
             {/* <Route path="/CanteenPage" element={<CanteenPage />} /> */}

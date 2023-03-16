@@ -23,7 +23,7 @@ const LandingPage = () => {
           <div className="nav-items">
             <img
               className="nav-logo"
-              src="/images/winkeat-logo.png"
+              src="/images/winkeat-logo2.png"
               alt="not available"
             />
             <i>

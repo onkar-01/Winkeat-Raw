@@ -5,8 +5,25 @@
   color: #535353;
   font-weight: 700;
 }
-
+.vendor-order-page-h1{
+  padding-top: 35px;
+  padding-bottom: 35px;
+  margin-left: 200px;
+  color: #535353;
+  font-weight: 700;
+  
+}
 @media screen and (max-width: 800px) {
+  .vendor-order-page-h1 {
+    padding-top: 35px;
+    padding-bottom: 35px;
+    margin-left: 0px;
+    color: #535353;
+    font-weight: 700;
+    width: 100%;
+    font-size: 30px;
+    text-align: center;
+  }
   .order-page-h1 {
     padding-top: 35px;
     padding-bottom: 35px;
