@@ -3,26 +3,33 @@
   margin-left: 250px;
   border: 0.5px solid;
   width: 1000px;
-  height: 120px;
+  height: 118px;
   border-radius: 20px;
   display: flex;
   justify-content: space-between;
   padding-right: 10px;
+  font-size: 12px;
 }
 .card-img-img {
   height: 118px;
   border-radius: 20px;
+  width: 150px;
 }
 .card-info {
   position: relative;
   right: 37px;
-  top: 20px;
+  top: 10px;
 }
 .card-status {
-  padding-top: 20px;
+  padding-top: 10px;
 }
 .post-order-activity {
   padding-top: 30px;
+}
+.note {
+  font-size: 15px;
+  font-weight: 500;
+  margin-left: -20px;
 }
 .post-order-activity button {
   border-radius: 20px;
@@ -35,17 +42,60 @@
   font-weight: 500;
   cursor: pointer;
 }
-
+.pre-order-activity {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 80px;
+}
+.pre-order-activity .btn-success {
+  border-radius: 20px;
+  background-color: #499900;
+  font-size: 15px;
+  border: none;
+  color: white;
+  width: 110px;
+  height: 30px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.pre-order-activity .btn-reject {
+  border-radius: 20px;
+  background-color: #ff0000;
+  font-size: 15px;
+  border: none;
+  color: white;
+  width: 110px;
+  height: 30px;
+  font-weight: 500;
+  cursor: pointer;
+}
 @media screen and (max-width: 800px) {
   .order-card-body {
     margin-top: 30px;
     margin: 20px;
     border: 0.5px solid;
-    width: 1000px;
-    height: 120px;
+    width: 400px;
+    height: 118px;
     border-radius: 20px;
     display: flex;
     justify-content: space-between;
     padding-right: 10px;
+    font-size: 9px;
+  }
+  .card-info {
+    position: relative;
+    right: 0px;
+    top: 20px;
+  }
+  .card-img-img {
+    height: 118px;
+    border-radius: 20px;
+    width: 130px;
+  }
+  .note {
+    font-size: 15px;
+    font-weight: 500;
   }
 }

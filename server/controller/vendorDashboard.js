@@ -260,12 +260,96 @@ const addimage = async (req, res, next) => {
 
 const getorders = async (req, res, next) => {
   try {
-    const orders = await Order.find({ vendor: req.rootVendor._id })
-      .populate("user", "name email")
-      .populate("vendor", "name")
-      .populate("items.item", "name")
-      .exec();
-    res.status(200).json({ orders });
+    const orders = await Order.findOne({
+      vendorid: req.rootVendor._id,
+      paymentStatus: "paid",
+    }).exec();
+    if (!orders) {
+      return res.status(400).json({ error: "No Orders Found" });
+    }
+    // console.log(orders.items);
+    const orderItem = [];
+    const user = await User.findOne({ _id: orders.customerId }).exec();
+    for (const element of orders.items) {
+      const item = await Item.findOne({ _id: element.itemId }).exec();
+
+      if (!item) {
+        return res.status(400).json({ error: "No Items Found" });
+      }
+      orderItem.push({
+        id: orders._id,
+        itemId: item._id,
+        itemName: item.name,
+        itemImage: item.image,
+        itemPrice: item.price,
+        itemQuantity: element.quantity,
+        itemTotal: orders.totalPrice,
+        customerName: user.name,
+        paymentStatus: orders.paymentStatus,
+        productStatus: orders.status,
+      });
+    }
+    res.status(200).json({ orderItem });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+const changeStatus = async (req, res, next) => {
+  try {
+    const order = await Order.findOneAndUpdate(
+      { _id: req.params.id },
+      { status: req.body.status }
+    ).exec();
+    res.status(200).json({ message: "Status Updated Successfully" });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+const acceptorder = async (req, res, next) => {
+  try {
+    const order = await Order.findOneAndUpdate(
+      { _id: req.params.id },
+      { status: "in progress" }
+    ).exec();
+    res.status(200).json({ message: "Order Accepted" });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+const rejectorder = async (req, res, next) => {
+  try {
+    const order = await Order.findOneAndUpdate(
+      { _id: req.params.id },
+      { status: "rejected" }
+    ).exec();
+    res.status(200).json({ message: "Order Rejected" });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+const orderdelivered = async (req, res, next) => {
+  try {
+    const order = await Order.findOneAndUpdate(
+      { _id: req.params.id },
+      { status: "delivered" }
+    ).exec();
+    res.status(200).json({ message: "Order Delivered" });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+const ordercompleted = async (req, res, next) => {
+  try {
+    const order = await Order.findOneAndUpdate(
+      { _id: req.params.id },
+      { status: "completed" }
+    ).exec();
+    res.status(200).json({ message: "Order Completed" });
   } catch (err) {
     return next(err);
   }
@@ -280,4 +364,9 @@ module.exports = {
   deletecategory,
   addimage,
   getorders,
+  changeStatus,
+  acceptorder,
+  rejectorder,
+  orderdelivered,
+  ordercompleted,
 };

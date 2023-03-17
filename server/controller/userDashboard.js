@@ -251,7 +251,7 @@ const getorders = async (req, res, next) => {
   try {
     const order = await Order.findOne({
       customerId: req.rootUser._id,
-      paymentStatus: "pending",
+      paymentStatus: "paid",
     });
     if (!order) {
       return res.status(400).json({ error: "Order not found" });
@@ -273,7 +273,7 @@ const getorders = async (req, res, next) => {
         itemImage: item.image,
         itemPrice: item.price,
         itemQuantity: element.quantity,
-        itemTotal: element.price,
+        itemTotal: order.totalPrice,
         vendorName: vendor.name,
         PaymentStatus: order.paymentStatus,
         productStatus: order.status,

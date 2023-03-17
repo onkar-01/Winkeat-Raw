@@ -177,6 +177,31 @@ router.get(
   require("../controller/vendorDashboard").getorders
 );
 
+router.post(
+  "/order/accept/:id",
+  vendorAuthenticate,
+  require("../controller/vendorDashboard").acceptorder
+);
+
+router.post(
+  "/order/reject/:id",
+  vendorAuthenticate,
+  require("../controller/vendorDashboard").rejectorder
+);
+
+router.post(
+  "/order/delivered/:id",
+  vendorAuthenticate,
+  require("../controller/vendorDashboard").orderdelivered
+);
+
+router.post(
+  "/order/completed/:id",
+  vendorAuthenticate,
+  require("../controller/vendorDashboard").ordercompleted
+);
+
+
 router.post("/");
 
 module.exports = router;

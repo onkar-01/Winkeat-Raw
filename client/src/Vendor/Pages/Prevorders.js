@@ -7,7 +7,7 @@ const Prevorders = () => {
   const [orderData, setOrderData] = useState([]);
 
   useEffect(() => {
-    fetch("/api/user/getorders")
+    fetch("/api/vendor/getorders")
       .then((res) => res.json())
       .then((data) => {
         setOrderData(data.orderItem);
@@ -18,9 +18,11 @@ const Prevorders = () => {
 
   function OrderCardInfo(orderData) {
     const {
+      id,
       itemName,
-      vendorName,
+      customerName,
       productStatus,
+      paymentStatus,
       itemQuantity,
       itemPrice,
       itemImage,
@@ -28,12 +30,13 @@ const Prevorders = () => {
     return (
       <OrderCard
         name={itemName}
-        canteenName={vendorName}
+        canteenName={customerName}
         orderStatus={productStatus}
-        postOrderActivity="Download Invoice"
         quantity={itemQuantity}
         price={itemPrice}
         image={itemImage}
+        paymentStatus={paymentStatus}
+        id={id}
       />
     );
   }
