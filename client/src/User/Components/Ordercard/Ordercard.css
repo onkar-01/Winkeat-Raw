@@ -1,4 +1,4 @@
-.order-card-body {
+.user-order-card-body {
   margin-top: 30px;
   margin-left: 250px;
   border: 0.5px solid;
@@ -37,7 +37,7 @@
 }
 
 @media screen and (max-width: 800px) {
-  .order-card-body {
+  .user-order-card-body {
     margin-top: 30px;
     margin: 20px;
     border: 0.5px solid;

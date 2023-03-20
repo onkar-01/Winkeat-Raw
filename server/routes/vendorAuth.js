@@ -11,9 +11,9 @@ const cloudinary = require("cloudinary").v2; // for cloudinary use
 
 // Configuration of cloudinary
 cloudinary.config({
-  cloud_name: "dwceepc2n",
-  api_key: "454337413752854",
-  api_secret: "c-Rp6Uu8LMBwTSWiVdtnS02--AU",
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 const {
@@ -200,7 +200,6 @@ router.post(
   vendorAuthenticate,
   require("../controller/vendorDashboard").ordercompleted
 );
-
 
 router.post("/");
 

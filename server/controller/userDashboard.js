@@ -23,6 +23,7 @@ const addtocart = async (req, res, next) => {
         if (!itemExist) {
           return res.status(400).json({ error: "Item not found" });
         }
+        console.log(itemExist.createdBy);
         const cartExist = await Cart.findOne({
           customerId: req.rootUser._id,
           productStatus: "Pending",
@@ -45,6 +46,7 @@ const addtocart = async (req, res, next) => {
           }
         } else {
           const cart = new Cart({
+            vendorId: itemExist.createdBy,
             customerId: req.rootUser._id,
             items: [{ itemId: id, quantity, price }],
             total: price,
@@ -73,6 +75,7 @@ const addtocart = async (req, res, next) => {
 const addtocartOnebyOne = async (req, res, next) => {
   try {
     const { id, quantity, price } = req.body;
+    console.log(req.body);
     if (!id || !quantity || !price) {
       return res.status(400).json({ error: "Please fill all the data" });
     }
@@ -80,6 +83,7 @@ const addtocartOnebyOne = async (req, res, next) => {
     if (!itemExist) {
       return res.status(400).json({ error: "Item not found" });
     }
+
     const cartExist = await Cart.findOne({
       customerId: req.rootUser._id,
       productStatus: "Pending",
@@ -102,6 +106,7 @@ const addtocartOnebyOne = async (req, res, next) => {
       }
     } else {
       const cart = new Cart({
+        vendorId: itemExist.createdBy,
         customerId: req.rootUser._id,
         items: [{ itemId: id, quantity, price }],
         total: price,
@@ -151,6 +156,7 @@ const getcart = async (req, res, next) => {
   try {
     const cart = await Cart.findOne({
       customerId: req.rootUser._id,
+      vendorId: req.params.vendor,
       productStatus: "Pending",
     });
     if (!cart) {
@@ -165,7 +171,8 @@ const getcart = async (req, res, next) => {
         return res.status(400).json({ error: "Item not found" });
       }
       cartItem.push({
-        itemId: item._id,
+        vendorId: cart.vendorId,
+        itemid: item._id,
         itemName: item.name,
         itemImage: item.image,
         itemPrice: item.price,
@@ -203,7 +210,7 @@ const CustomerOrder = async (req, res, next) => {
         const orderExist = await Order.findOne({
           customerId: req.rootUser._id,
           vendorId: vendor_id,
-          productStatus: "Pending",
+          paymentStatus: "pending",
         });
         if (orderExist) {
           const itemExistInOrder = orderExist.items.find(
@@ -215,7 +222,7 @@ const CustomerOrder = async (req, res, next) => {
             await orderExist.save();
             update = true;
           } else {
-            orderExist.items.push({ id, quantity, price });
+            orderExist.items.push({ itemId: id, quantity, price });
             orderExist.totalPrice = orderExist.totalPrice + quantity * price;
             await orderExist.save();
             added = true;
@@ -249,40 +256,95 @@ const CustomerOrder = async (req, res, next) => {
 
 const getorders = async (req, res, next) => {
   try {
-    const order = await Order.findOne({
+    const orders = await Order.find({
       customerId: req.rootUser._id,
       paymentStatus: "paid",
     });
-    if (!order) {
+    if (!orders) {
       return res.status(400).json({ error: "Order not found" });
     }
     const orderItem = [];
-    const vendor = await Vendor.findOne({
-      _id: order.vendorId,
-    });
-    for (const element of order.items) {
-      const item = await Item.findOne({
-        _id: element.itemId,
+
+    for (const order of orders) {
+      const vendor = await Vendor.findOne({
+        _id: order.vendorId,
       });
-      if (!item) {
-        return res.status(400).json({ error: "Item not found" });
+      for (const element of order.items) {
+        const item = await Item.findOne({
+          _id: element.itemId,
+        });
+        if (!item) {
+          return res.status(400).json({ error: "Item not found" });
+        }
+        orderItem.push({
+          itemId: item._id,
+          itemName: item.name,
+          itemImage: item.image,
+          itemPrice: item.price,
+          itemQuantity: element.quantity,
+          itemTotal: order.totalPrice,
+          vendorName: vendor.name,
+          PaymentStatus: order.paymentStatus,
+          productStatus: order.status,
+        });
       }
-      orderItem.push({
-        itemId: item._id,
-        itemName: item.name,
-        itemImage: item.image,
-        itemPrice: item.price,
-        itemQuantity: element.quantity,
-        itemTotal: order.totalPrice,
-        vendorName: vendor.name,
-        PaymentStatus: order.paymentStatus,
-        productStatus: order.status,
-      });
     }
+
+    // for (const element of orders) {
+    //   for (const elementItem of element.items) {
+    //     const item = await Item.findOne({
+    //       _id: elementItem.itemId,
+    //     });
+    //     if (!item) {
+    //       return res.status(400).json({ error: "Item not found" });
+    //     }
+    //     orderItem.push({
+    //       itemId: item._id,
+    //       itemName: item.name,
+    //       itemImage: item.image,
+    //       itemPrice: item.price,
+    //       itemQuantity: elementItem.quantity,
+    //       itemTotal: elementItem.price,
+    //     });
+    //   }
+    // }
+
     return res.status(200).json({
       orderItem,
-      total: order.totalPrice,
     });
+
+    // return res.status(200).json({ order });
+
+    // if (!order) {
+    //   return res.status(400).json({ error: "Order not found" });
+    // }
+    // const orderItem = [];
+    // const vendor = await Vendor.findOne({
+    //   _id: order.vendorId,
+    // });
+    // for (const element of order.items) {
+    //   const item = await Item.findOne({
+    //     _id: element.itemId,
+    //   });
+    //   if (!item) {
+    //     return res.status(400).json({ error: "Item not found" });
+    //   }
+    //   orderItem.push({
+    //     itemId: item._id,
+    //     itemName: item.name,
+    //     itemImage: item.image,
+    //     itemPrice: item.price,
+    //     itemQuantity: element.quantity,
+    //     itemTotal: order.totalPrice,
+    //     vendorName: vendor.name,
+    //     PaymentStatus: order.paymentStatus,
+    //     productStatus: order.status,
+    //   });
+    // }
+    // return res.status(200).json({
+    //   orderItem,
+    //   total: order.totalPrice,
+    // });
   } catch (err) {
     return next(err);
   }
@@ -292,5 +354,6 @@ module.exports = {
   CustomerOrder,
   getcart,
   removefromcartOnebyOne,
+  addtocartOnebyOne,
   getorders,
 };

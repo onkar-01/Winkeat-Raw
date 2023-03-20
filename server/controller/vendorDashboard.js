@@ -260,7 +260,7 @@ const addimage = async (req, res, next) => {
 
 const getorders = async (req, res, next) => {
   try {
-    const orders = await Order.findOne({
+    const orders = await Order.find({
       vendorid: req.rootVendor._id,
       paymentStatus: "paid",
     }).exec();
@@ -269,25 +269,31 @@ const getorders = async (req, res, next) => {
     }
     // console.log(orders.items);
     const orderItem = [];
-    const user = await User.findOne({ _id: orders.customerId }).exec();
-    for (const element of orders.items) {
-      const item = await Item.findOne({ _id: element.itemId }).exec();
-
-      if (!item) {
-        return res.status(400).json({ error: "No Items Found" });
-      }
-      orderItem.push({
-        id: orders._id,
-        itemId: item._id,
-        itemName: item.name,
-        itemImage: item.image,
-        itemPrice: item.price,
-        itemQuantity: element.quantity,
-        itemTotal: orders.totalPrice,
-        customerName: user.name,
-        paymentStatus: orders.paymentStatus,
-        productStatus: orders.status,
+    // const user = await User.findOne({ _id: orders.customerId }).exec();
+    for (const order of orders) {
+      const user = await User.findOne({
+        _id: order.customerId,
       });
+      for (const element of order.items) {
+        const item = await Item.findOne({
+          _id: element.itemId,
+        });
+        if (!item) {
+          return res.status(400).json({ error: "Item not found" });
+        }
+        orderItem.push({
+          id: order._id,
+          itemId: item._id,
+          itemName: item.name,
+          itemImage: item.image,
+          itemPrice: item.price,
+          itemQuantity: element.quantity,
+          itemTotal: order.totalPrice,
+          customerName: user.name,
+          paymentStatus: order.paymentStatus,
+          productStatus: order.status,
+        });
+      }
     }
     res.status(200).json({ orderItem });
   } catch (err) {

@@ -141,7 +141,12 @@ const OrderCard = (props) => {
         )}
         {orderStatus === "delivered" && (
           <div className="pre-order-activity">
-            <p className="note">Your order is Delivered</p>
+            <p className="note">Order is Delivered</p>
+          </div>
+        )}
+        {orderStatus === "rejected" && (
+          <div className="pre-order-activity">
+            <p className="note">Order is rejected</p>
           </div>
         )}
       </div>

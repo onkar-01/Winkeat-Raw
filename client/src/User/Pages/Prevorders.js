@@ -13,7 +13,7 @@ const Prevorders = () => {
       .then((data) => {
         setOrderData(data.orderItem);
       });
-  }, []);
+  }, [orderData]);
 
   console.log(orderData);
 

@@ -22,6 +22,7 @@ const CanteenPageMain = (props) => {
   const [Loader, setLoader] = useState(true);
   const navigate = useNavigate();
   const vendorId = localStorage.getItem("vendorId");
+  const vendorName = localStorage.getItem("vendorName");
   const [categoryData, setCategoryData] = useState([]);
   const [itemsData, setitemsData] = useState([]);
   const [error, setError] = useState();
@@ -99,7 +100,7 @@ const CanteenPageMain = (props) => {
   return (
     <>
       <div className="maincanteen-container">
-        <CanteenNavBar />
+        <CanteenNavBar canteenName={vendorName} />
 
         {error ? (
           <>
@@ -123,7 +124,7 @@ const CanteenPageMain = (props) => {
             <hr className="hrforMid" />
             <div className="canteen-body-body">
               <MediaQuery query="(max-width: 600px)">
-                <Scrollbars style={{ width: 430, height: 500 }}>
+                <Scrollbars style={{ width: 430, height: 550 }}>
                   {/* {categoryData.map((category)=>{ */}
                   <>
                     <div className="menu-start">
@@ -142,9 +143,6 @@ const CanteenPageMain = (props) => {
                       })}
                     </div>
                   </>
-                  <br />
-                  <br />
-                  <br />
                 </Scrollbars>
               </MediaQuery>
               <MediaQuery query="(min-width: 600px)">

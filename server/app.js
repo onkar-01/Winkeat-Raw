@@ -34,11 +34,11 @@ app.use("/api/user", require("./routes/userAuth"));
 // vendor routes
 app.use("/api/vendor", require("./routes/vendorAuth"));
 
-app.get("/api/getkey", (req, res) => {
-  res.status(200).json({
-    key: process.env.RAZORPAY_KEY_ID,
-  });
-});
+// app.get("/api/getkey", (req, res) => {
+//   res.status(200).json({
+//     key: process.env.RAZORPAY_KEY_ID,
+//   });
+// });
 // error handler middleware
 app.use(errorHandler);
 

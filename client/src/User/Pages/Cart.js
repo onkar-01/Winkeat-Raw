@@ -13,8 +13,7 @@ import { Scrollbars } from "react-custom-scrollbars";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import MediaQuery from "react-responsive";
-const vendorId = localStorage.getItem("vendorId");
-
+const vendor = localStorage.getItem("vendorId");
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   "label + &": {
     marginTop: theme.spacing(3),
@@ -59,7 +58,7 @@ const Cart = (item) => {
     try {
       const fetchItData = async () => {
         await axios
-          .get(`api/user/getcart`)
+          .get(`api/user/${vendor}/getcart`)
           .then((res) => {
             // console.log("abayega data2");
             setCartData(res.data.cartItem);
@@ -81,6 +80,8 @@ const Cart = (item) => {
 
   // new
 
+  // console.log(cartData[0]);
+
   const [price, setPrice] = useState(0);
   const handlePrice = () => {
     let prc = 0;
@@ -92,13 +93,49 @@ const Cart = (item) => {
     handlePrice();
   });
 
+  // <-------------------------------ADD AND REMOVE FROM CART------------------------------------------>
+
+  const addtocart = async (id, quantity, price) => {
+    console.log(id, quantity, price);
+    const res = await axios({
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      url: "/api/user/addtocart",
+      data: {
+        id: id,
+        quantity: quantity,
+        price: price,
+      },
+    });
+    console.log(res);
+  };
+  const removefromcart = async (id) => {
+    console.log(id);
+    const res = await axios({
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      url: "/api/user/removefromcart",
+      data: {
+        id: id,
+      },
+    });
+    console.log(res);
+  };
+
+  // <------------------------------------------------------------------------->
+
   // checkout handler ------------------------------------------------------------->
   const placeOrder = async () => {
+    console.log("called place order");
     let orderData = [];
     cartData.map((item) => {
       orderData.push({
-        vendor_id: vendorId,
-        id: item.itemId,
+        vendor_id: item.vendorId,
+        id: item.itemid,
         quantity: item.itemQuantity,
         price: item.itemPrice,
       });
@@ -126,8 +163,22 @@ const Cart = (item) => {
 
     const {
       data: { key },
-    } = await axios.get("http://localhost:9000/api/getkey");
+    } = await axios.get("/api/user/getkey");
     // console.log(window);
+
+    const {
+      data: { userData },
+    } = await axios.get("/api/user/about");
+
+    const res = await fetch("/api/user/about", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+    const data = await res.json();
 
     const options = {
       key: key, // Enter the Key ID generated from the Dashboard
@@ -139,9 +190,8 @@ const Cart = (item) => {
       order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
       callback_url: "http://localhost:9000/api/user/paymentverification",
       prefill: {
-        name: "Gaurav Kumar",
-        email: "gaurav.kumar@example.com",
-        contact: "9000090000",
+        name: data.name,
+        contact: data.mobileNo,
       },
       notes: {
         address: "Razorpay Corporate Office",
@@ -186,11 +236,12 @@ const Cart = (item) => {
             <Scrollbars>
               <div className="cart-body">
                 {cartData.map((item) => {
+                  // console.log(item.itemid);
                   return (
                     <Items
-                      key={item.itemId}
-                      id={item.itemId}
-                      img={item.itemImage}
+                      key={item.itemid}
+                      img={item.itemid}
+                      image={item.itemImage}
                       title={item.itemName}
                       description={item.itemTotal}
                       quantity={item.itemQuantity}
@@ -286,8 +337,9 @@ const Cart = (item) => {
               {cartData.map((item) => {
                 return (
                   <Items
-                    key={item.itemId}
-                    img={item.itemImage}
+                    key={item.itemid}
+                    img={item.itemid}
+                    image={item.itemImage}
                     title={item.itemName}
                     description={item.itemTotal}
                     quantity={item.itemQuantity}

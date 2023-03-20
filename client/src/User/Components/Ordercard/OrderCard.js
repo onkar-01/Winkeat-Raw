@@ -13,7 +13,7 @@ const OrderCard = (props) => {
   } = props;
   return (
     <>
-      <div className="order-card-body">
+      <div className="user-order-card-body">
         <div className="card-img">
           <img className="card-img-img" src={image} alt="not available" />
         </div>

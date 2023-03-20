@@ -11,6 +11,7 @@ const {
   checkout,
   paymentverification,
 } = require("../controller/paymentController");
+const { counters } = require("sharp");
 
 const app = express();
 const router = express.Router();
@@ -53,13 +54,19 @@ router.post(
 );
 
 router.get(
-  "/getcart",
+  "/:vendor/getcart",
   userAuthenticate,
   require("../controller/userDashboard").getcart
 );
 
 router.post(
-  "/removefromcart",
+  "/addtocartonebyone",
+  userAuthenticate,
+  require("../controller/userDashboard").addtocartOnebyOne
+);
+
+router.post(
+  "/removefromcartonebyone",
   userAuthenticate,
   require("../controller/userDashboard").removefromcartOnebyOne
 );
@@ -115,5 +122,11 @@ router.get(
   userAuthenticate,
   require("../controller/userDashboard").getorders
 );
+
+router.get("/getkey", userAuthenticate, (req, res) => {
+  res.status(200).json({
+    key: process.env.RAZORPAY_KEY_ID,
+  });
+});
 
 module.exports = router;

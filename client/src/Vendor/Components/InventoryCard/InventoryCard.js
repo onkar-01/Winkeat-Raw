@@ -133,10 +133,19 @@ const InventoryCard = (props) => {
             <h6>{name}</h6>
           </div>
           <div className="item-detail">
-            <div className="item-detail-2">
-              <h6>₹ {price}</h6>
-              <h6>Size: {size}</h6>
-            </div>
+            {(!size && (
+              <div
+                className="item-detail-2"
+                style={{ justifyContent: "center !important" }}
+              >
+                <h6>₹ {price}</h6>
+              </div>
+            )) || (
+              <div className="item-detail-2">
+                <h6>₹ {price}</h6>
+                <h6>Size: {size}</h6>
+              </div>
+            )}
           </div>
           <div className="Stock">
             <h6>Stock: {stock}</h6>

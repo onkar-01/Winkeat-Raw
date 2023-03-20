@@ -1,6 +1,4 @@
-
 const otpGenerator = require("otp-generator");
-
 const OTPModel = require("../models/otp");
 const UserModel = require("../models/User");
 // dotenv.config({ path: "./config.env" });
